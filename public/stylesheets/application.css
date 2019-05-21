@@ -1,0 +1,18 @@
+h1 {
+  font-family: cursive;
+}
+
+a.header {
+  text-decoration: none;
+  color: black;
+}
+
+.opener {
+  color: purple;
+  font-size: 30px;
+}
+
+.message {
+  background-color: yellow;
+  padding: 5px;
+}

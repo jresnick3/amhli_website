@@ -1,0 +1,16 @@
+<div class="opener">
+  <p>Are you a returning user?</p>
+</div>
+
+<form action="/signin" method="post">
+  <p>Insert your email and password.<p>
+  <div class="email">
+    <label for="email">Email<label>
+    <input id="email" type='text' name="email" value="<%= session[:email] %>"/>
+  </div>
+  <div>
+    <label for="password">Password<label>
+    <input id='password' type='password' name="password" value=""/>
+  </div>
+  <button type="submit">Submit</button>
+</form>

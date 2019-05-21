@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Adult Male Higher Learning Initiative</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/stylesheets/application.css" type="text/css">
+  </head>
+  <body>
+    <header>
+      <a href="/" class="header"><h1>Adult Male Higher Learning Initiative</h1></a>
+      <ul>
+        <li><a href="/weekly_events">Weekly Events</a></li>
+        <li><a href="/shiurim">Shiurim</a></li>
+        <li><a href="/night_seder">Night Seder Schedule</a></li>
+        <li><a href="/join">Join The Initiative</a></li>
+        <li><a href="/request_chavrusah">Request A Chavrusah</a></li>
+      <ul>
+      <% if session[:message] %>
+      <div class="message" ><p><%= session.delete(:message) %></p></div>
+      <% end %>
+    </header>
+    <%= yield %>
+    <footer>
+    <% if session[:signed_in] %>
+      <br>
+      <form action="/signout" method="post">
+        <button type="submit">Sign Out</button>
+      </form>
+    <% else %>
+      <br>
+      <div>
+        <label for="signin">Already a member?<label>
+        <a href="/signin" id="signin">Sign in</a>
+      </div>
+    <% end %>
+    </footer>
+  </body>
+</html>

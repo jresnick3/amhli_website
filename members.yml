@@ -1,0 +1,10 @@
+---
+yyr123@aol.com:
+  :first_name: J
+  :last_name: Res
+  :password: !ruby/string:BCrypt::Password
+    str: "$2a$10$FN89yVMiUiAky05XB1Sj/.mXa2i1mZMpc/3eb7.6wVHdTMW/M5Jfe"
+    version: 2a
+    cost: 10
+    salt: "$2a$10$FN89yVMiUiAky05XB1Sj/."
+    checksum: mXa2i1mZMpc/3eb7.6wVHdTMW/M5Jfe
