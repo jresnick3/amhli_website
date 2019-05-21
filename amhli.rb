@@ -13,6 +13,18 @@ configure do
   set :session_secret, 'secret1'
 end
 
+helpers do
+  def event_headers
+    @events = CSV.read('./data/weekly_events.csv')
+    @events.first
+  end
+
+  def events
+    @events = CSV.read('./data/weekly_events.csv')
+    @events[1..-1]
+  end
+end
+
 def load_members
   @members = YAML.load_file('./members.yml')
 end
@@ -77,6 +89,18 @@ end
 post '/signout' do
   session.delete(:email)
   redirect '/'
+end
+
+get '/weekly_events' do
+  erb :events
+end
+
+get '/shiurim' do
+  erb :shiurim
+end
+
+get '/night_seder' do
+  erb :schedule
 end
 
 get '/join' do

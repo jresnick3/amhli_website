@@ -1,0 +1,14 @@
+<table>
+  <tr>
+  <% event_headers.each do |header| %>
+    <th><%= header %></th>
+  <% end %>
+  </tr>
+  <% events.each do |event| %>
+    <tr>
+    <% event.each do |info| %>
+      <td><%= info %></td>
+    <% end %>
+    </tr>
+  <% end %>
+</table>
