@@ -21,7 +21,7 @@
     </header>
     <%= yield %>
     <footer>
-    <% if session[:signed_in] %>
+    <% if session[:email] %>
       <br>
       <form action="/signout" method="post">
         <button type="submit">Sign Out</button>

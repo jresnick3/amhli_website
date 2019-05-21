@@ -30,18 +30,18 @@ def add_member(first, last, email, password)
   File.open('./members.yml', 'w') {|file| file.write(members.to_yaml)}
 end
 
-def valid_user?
+def valid_user?(email)
   load_members
-  @members && @members.any?{ |key,_| key == session[:email]}
+  @members && @members.any?{ |key,_| key == email}
 end
 
-def valid_password?(password)
+def valid_password?(email, password)
   load_members
-  @members[session[:email]][:password] == password
+  @members[email][:password] == password
 end
 
-def valid_credentials?(password)
-  valid_user? && valid_password?(password)
+def valid_credentials?(email, password)
+  valid_user?(email) && valid_password?(email, password)
 end
 
 def signed_in?
@@ -63,19 +63,19 @@ get '/signin' do
 end
 
 post '/signin' do
-  session[:email], password = params[:email], params[:password]
-  if valid_credentials?(password)
+  email, password = params[:email], params[:password]
+  if valid_credentials?(email, password)
     session[:message] = "Sign in successful!"
-    session[:signed_in] = true
+    session[:email] = email
     redirect '/'
   else
     session[:message] = "Invalid Credentials."
-    redirect '/signin'
+    erb :signin
   end
 end
 
 post '/signout' do
-  session[:signed_in] = false
+  session.delete(:email)
   redirect '/'
 end
 
