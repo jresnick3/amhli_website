@@ -9,3 +9,7 @@ gem "sinatra-contrib"
 gem 'rack-test'
 gem 'minitest'
 gem 'bcrypt'
+
+group :production do
+  gem "puma"
+end

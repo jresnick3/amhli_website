@@ -1,7 +1,7 @@
 require 'pry'
 require 'tilt/erubis'
 require 'sinatra'
-require 'sinatra/reloader'
+require 'sinatra/reloader' if development?
 require 'rack'
 require 'sinatra/content_for'
 require 'yaml'
