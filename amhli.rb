@@ -25,12 +25,25 @@ helpers do
   end
 end
 
+def data_path
+  if ENV["RACK-ENV"] == "test"
+    File.expand_path('../test/data', __FILE__)
+  else
+    File.expand_path('../data', __FILE__)
+  end
+end
+
 def load_members
-  @members = YAML.load_file('./members.yml')
+  members_path = if ENV["RACK_ENV"] = "test"
+    File.expand_path("../test/members.yml", __FILE__)
+  else
+    File.expand_path("../members.yml", __FILE__)
+  end
+  YAML.load_file(members_path)
 end
 
 def valid_new_member?(email)
-  load_members
+  @members = load_members
   return true unless @members
   @members.none?{ |key,_| key == email}
 end
@@ -43,12 +56,12 @@ def add_member(first, last, email, password)
 end
 
 def valid_user?(email)
-  load_members
+  @members = load_members
   @members && @members.any?{ |key,_| key == email}
 end
 
 def valid_password?(email, password)
-  load_members
+  @members = load_members
   @members[email][:password] == password
 end
 
@@ -57,11 +70,12 @@ def valid_credentials?(email, password)
 end
 
 def signed_in?
-  session[:signed_in]
+  session[:email]
 end
 
 def add_to_sheet(time)
-  CSV.open('./data/requests.csv', 'wb') do |csv|
+  pattern = File.join(data_path, 'requests.csv')
+  CSV.open(pattern, 'wb') do |csv|
     csv << [session[:email], time]
   end
 end
@@ -81,6 +95,7 @@ post '/signin' do
     session[:email] = email
     redirect '/'
   else
+    status 422
     session[:message] = "Invalid Credentials."
     erb :signin
   end

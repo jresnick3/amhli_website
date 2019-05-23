@@ -1,0 +1,10 @@
+---
+example@aol.com:
+  :first_name: John
+  :last_name: Smith
+  :password: !ruby/string:BCrypt::Password
+    str: "$2a$10$ZEqkeM5FrN8teLNzZUeHBOMhEVwZ7fbR5TeAwUMCKqscYnbOaLoVa"
+    version: 2a
+    cost: 10
+    salt: "$2a$10$ZEqkeM5FrN8teLNzZUeHBO"
+    checksum: MhEVwZ7fbR5TeAwUMCKqscYnbOaLoVa
